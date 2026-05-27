@@ -12,35 +12,43 @@ const createRecipe = async (req, res) => {
     }
 
     const prompt = `
-    You are a assistant for an app named GusteauAI and you need to create recipes based on given ingredients, cuisine type and difficulty by the user.
-    Return the response stricly in json format only. Don't add extra text or suggestions in the response. Your job is to ONLY return valid JSON.DO NOT:
-    - write explanations
-    - write markdown
-    - write headings
-    - write sample text
-    - write code blocks
+  You are an AI culinary assistant for the app GuesteauAI.
+
+  Generate one realistic, practical, easy-to-follow recipe.
+
+  Rules:
+    - Return ONLY valid JSON
+    - No markdown
+    - No explanations
+    - No code blocks
+    - No extra text
+
+  Use:
+  Ingredients: ${ingredients}
+  Cuisine: ${cuisine}
+  Difficulty: ${difficulty}
 
 
-    Generate a recipe using following data :
-    Ingredients: ${ingredients}
+  Generate a recipe using following data :
+  Ingredients: ${ingredients}
 
-    Cuisine: ${cuisine}
+  Cuisine: ${cuisine}
 
-    Difficulty: ${difficulty}
+  Difficulty: ${difficulty}
 
-    Return in this format: 
 
-    {
-    title :
-    ingredients : 
-    steps : 
-    calories :
-    time_taken : 
-    }
+  Return exactly in this JSON format:
+
+{
+  "title": "Recipe title",
+  "ingredients": ["ingredient1", "ingredient2"],
+  "steps": ["step 1", "step 2"],
+  "calories": "450 kcal",
+  "time_taken": "30 minutes"
+}
     `;
 
     const recipe = await generateRecipe(prompt);
-
     res.status(200).json({
       success: true,
       message: "Recipe generated successfully",
