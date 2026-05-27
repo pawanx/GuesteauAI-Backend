@@ -35,6 +35,7 @@ const createRecipe = async (req, res) => {
     ingredients : 
     steps : 
     calories :
+    time_taken : 
     }
     `;
 
